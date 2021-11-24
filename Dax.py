@@ -41,8 +41,7 @@ cleaned_df = df.drop(columns="dailychange")
 
 #Analysis
 
-x = cleaned_df['High']
-y = cleaned_df['High']
+#     cleaned_df.index   DATES
 
 
 
