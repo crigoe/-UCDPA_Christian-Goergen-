@@ -44,9 +44,6 @@ cleaned_df = df.drop(columns="dailychange")
 x = cleaned_df['High']
 y = cleaned_df['High']
 
-print('hello')
-
-
 
 
 
