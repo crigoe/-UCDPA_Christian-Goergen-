@@ -39,6 +39,9 @@ pd.concat([df, df['Up Or Down']], axis=1)
 
 cleaned_df = df.drop(columns="dailychange")
 
+
+
+
 #Analysis
 
 #     cleaned_df.index   DATES
