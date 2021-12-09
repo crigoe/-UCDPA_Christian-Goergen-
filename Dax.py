@@ -4,15 +4,24 @@ import matplotlib.pyplot as plt
 import re
 
 #Loading dataset
-data = pd.read_csv('../UCD_Final-Project/data/DAX.csv')
+data = pd.read_csv('data/DAX.csv')
 df = pd.DataFrame(data)
 
 # Checking for missing values
 missing_values_count = df.isnull().sum()
+# print (missing_values_count)
 # No missing values detected.
+
+Datum = str(df['Datum'])
+output = re.findall("\.11\.", Datum)
+print (output.head())
+
+
+
 
 
 #Translating column names
+
 df = df.rename(columns={"Datum": "Date", "Zuletzt": "Latest Price", "Eröffn.": "Open Price", "Hoch": "High", "Tief": "Low", "Vol": "Volume", "+/- %": "Change"})
 
 df = df.set_index("Date")
@@ -42,9 +51,26 @@ cleaned_df = df.drop(columns="dailychange")
 
 
 
-#Analysis
+up = df.loc[df['Up Or Down'] == 'Up']
+down = df.loc[df['Up Or Down'] == 'Down']
 
-#     cleaned_df.index   DATES
+
+
+jan = '\.01\.'
+feb = '\.02\.'
+mar = '\.03\.'
+apr = '\.04\.'
+may = '\.05\.'
+jun = '\.06\.'
+jul = '\.07\.'
+aug = '\.08\.'
+sep = '\.09\.'
+oct = '\.10\.'
+nov = '\.11\.'
+dec = '\.12\.'
+
+
+
 
 
 
