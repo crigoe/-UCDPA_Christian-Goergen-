@@ -1,21 +1,39 @@
+#importing external libraries
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import re
+#from sklearn.neighbors import KNeighborsClassifier
+
+#importing files
+from webscraping import *
 
 #Loading dataset
 data = pd.read_csv('data/DAX.csv')
 df = pd.DataFrame(data)
 
 # Checking for missing values
-missing_values_count = df.isnull().sum()
+# missing_values_count = df.isnull().sum()
 # print (missing_values_count)
 # No missing values detected.
 
 Datum = str(df['Datum'])
-output = re.findall("\.11\.", Datum)
-print (output.head())
 
+
+# Analysing Data - Regex
+
+df['Datum'] = df['Datum'].str.replace('\.01\.', '.Jan.',regex=True).astype('str')
+df['Datum'] = df['Datum'].str.replace('\.02\.', '.Feb.',regex=True).astype('str')
+df['Datum'] = df['Datum'].str.replace('\.03\.', '.Mar.',regex=True).astype('str')
+df['Datum'] = df['Datum'].str.replace('\.04\.', '.Apr.',regex=True).astype('str')
+df['Datum'] = df['Datum'].str.replace('\.05\.', '.May.',regex=True).astype('str')
+df['Datum'] = df['Datum'].str.replace('\.06\.', '.Jun.',regex=True).astype('str')
+df['Datum'] = df['Datum'].str.replace('\.07\.', '.Jul.',regex=True).astype('str')
+df['Datum'] = df['Datum'].str.replace('\.08\.', '.Aug.',regex=True).astype('str')
+df['Datum'] = df['Datum'].str.replace('\.09\.', '.Sep.',regex=True).astype('str')
+df['Datum'] = df['Datum'].str.replace('\.10\.', '.Oct.',regex=True).astype('str')
+df['Datum'] = df['Datum'].str.replace('\.11\.', '.Nov.',regex=True).astype('str')
+df['Datum'] = df['Datum'].str.replace('\.12\.', '.Dec.',regex=True).astype('str')
 
 
 
@@ -56,24 +74,24 @@ down = df.loc[df['Up Or Down'] == 'Down']
 
 
 
-jan = '\.01\.'
-feb = '\.02\.'
-mar = '\.03\.'
-apr = '\.04\.'
-may = '\.05\.'
-jun = '\.06\.'
-jul = '\.07\.'
-aug = '\.08\.'
-sep = '\.09\.'
-oct = '\.10\.'
-nov = '\.11\.'
-dec = '\.12\.'
 
 
 
 
 
+#Maschine Learning
+
+#y = df['Date'].values
+#y = df['Up or Down'].values
+
+# Create a k-NN classifier with 6 neighbors
+#knn = KNeighborsClassifier(n_neighbors=6)
+
+# Fit the classifier to the data
+#knn.fit(X,y)
 
 
 
+
+print (dax_today_int)
 
