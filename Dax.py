@@ -1,5 +1,4 @@
 #importing external libraries
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,9 +7,38 @@ import matplotlib.pyplot as plt
 #importing files
 from webscraping import *
 
+
 #Loading dataset
 data = pd.read_csv('data/DAX.csv')
 df = pd.DataFrame(data)
+
+
+vix = pd.read_csv('data/vix.csv')
+
+vix_df = pd.DataFrame(vix)
+vix_df = vix.drop(columns=['Zuletzt','Eröffn.','Hoch','Tief','Vol.'])
+
+vix_df = vix_df.rename(columns={"Datum": "Date", "+/- %": "VIX"})
+
+vix_df = vix_df.set_index("Date")
+vix_df['VIX'] = vix_df['VIX'].str.replace(',','.')
+
+
+volindex = (vix_df['VIX'])
+volindex = [x.strip('%') for x in volindex]
+vix_df['VIX'] = volindex
+vix_df['VIX'] = vix_df['VIX'].astype(float)
+
+# Checking for missing values
+#missing_values_count_vix = vix_df.isnull().sum()
+#print (missing_values_count_vix)
+#print (vix_df.shape)
+#No missing values detected.
+
+
+
+#Merging two DataFrames
+
 
 
 #Print the shape of Dataframe  and Check for Null Values
@@ -27,13 +55,13 @@ Datum = str(df['Datum'])
 
 
 # Analysing Data - Regex
-
+"""
 def month_no_to_name(monthregex,monthname):
-    """
+    
        This function transforms the format of the date.
        Instead of a number, the month will be replaced with the 3 character abbreviation
        so it will be easier to select rows from a specific month later on
-       """
+     
     df['Datum'] = df['Datum'].str.replace(monthregex,monthname, regex=True).astype('str')
 
 month_no_to_name('\.01\.','.Jan.')
@@ -49,7 +77,7 @@ month_no_to_name('\.10\.','.Oct.')
 month_no_to_name('\.11\.','.Nov.')
 month_no_to_name('\.12\.','.Dec.')
 
-
+  """
 
 #Translating column names
 
@@ -89,7 +117,15 @@ down = df.loc[df['Up Or Down'] == 'Down']
 
 
 
+merged_data= pd.merge(cleaned_df,vix_df,on='Date')
+print(cleaned_df.shape, vix_df.shape)
+print(merged_data.head())
 
+
+missing_values_count = merged_data.isnull().sum()
+print (missing_values_count)
+print (merged_data.shape)
+#No missing values detected.
 
 
 
