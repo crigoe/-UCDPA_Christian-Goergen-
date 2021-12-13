@@ -12,29 +12,42 @@ from webscraping import *
 data = pd.read_csv('data/DAX.csv')
 df = pd.DataFrame(data)
 
+
+#Print the shape of Dataframe  and Check for Null Values
+
+
 # Checking for missing values
 # missing_values_count = df.isnull().sum()
 # print (missing_values_count)
 # No missing values detected.
+# print (df.shape)
 
 Datum = str(df['Datum'])
 
 
+
 # Analysing Data - Regex
 
-df['Datum'] = df['Datum'].str.replace('\.01\.', '.Jan.',regex=True).astype('str')
-df['Datum'] = df['Datum'].str.replace('\.02\.', '.Feb.',regex=True).astype('str')
-df['Datum'] = df['Datum'].str.replace('\.03\.', '.Mar.',regex=True).astype('str')
-df['Datum'] = df['Datum'].str.replace('\.04\.', '.Apr.',regex=True).astype('str')
-df['Datum'] = df['Datum'].str.replace('\.05\.', '.May.',regex=True).astype('str')
-df['Datum'] = df['Datum'].str.replace('\.06\.', '.Jun.',regex=True).astype('str')
-df['Datum'] = df['Datum'].str.replace('\.07\.', '.Jul.',regex=True).astype('str')
-df['Datum'] = df['Datum'].str.replace('\.08\.', '.Aug.',regex=True).astype('str')
-df['Datum'] = df['Datum'].str.replace('\.09\.', '.Sep.',regex=True).astype('str')
-df['Datum'] = df['Datum'].str.replace('\.10\.', '.Oct.',regex=True).astype('str')
-df['Datum'] = df['Datum'].str.replace('\.11\.', '.Nov.',regex=True).astype('str')
-df['Datum'] = df['Datum'].str.replace('\.12\.', '.Dec.',regex=True).astype('str')
+def month_no_to_name(monthregex,monthname):
+    """
+       This function transforms the format of the date.
+       Instead of a number, the month will be replaced with the 3 character abbreviation
+       so it will be easier to select rows from a specific month later on
+       """
+    df['Datum'] = df['Datum'].str.replace(monthregex,monthname, regex=True).astype('str')
 
+month_no_to_name('\.01\.','.Jan.')
+month_no_to_name('\.02\.','.Feb.')
+month_no_to_name('\.03\.','.Mar.')
+month_no_to_name('\.04\.','.Apr.')
+month_no_to_name('\.05\.','.May.')
+month_no_to_name('\.06\.','.Jun.')
+month_no_to_name('\.07\.','.Jul.')
+month_no_to_name('\.08\.','.Aug.')
+month_no_to_name('\.09\.','.Sep.')
+month_no_to_name('\.10\.','.Oct.')
+month_no_to_name('\.11\.','.Nov.')
+month_no_to_name('\.12\.','.Dec.')
 
 
 
@@ -71,6 +84,7 @@ cleaned_df = df.drop(columns="dailychange")
 
 up = df.loc[df['Up Or Down'] == 'Up']
 down = df.loc[df['Up Or Down'] == 'Down']
+
 
 
 
