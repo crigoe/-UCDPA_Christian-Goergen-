@@ -5,16 +5,14 @@ import matplotlib.pyplot as plt
 #from sklearn.neighbors import KNeighborsClassifier
 
 #importing files
-from webscraping import *
-
+#from webscraping import *
+#print (dax_today_int)
 
 #Loading dataset
 data = pd.read_csv('data/DAX.csv')
 df = pd.DataFrame(data)
 
-
 vix = pd.read_csv('data/vix.csv')
-
 vix_df = pd.DataFrame(vix)
 vix_df = vix.drop(columns=['Zuletzt','Eröffn.','Hoch','Tief','Vol.'])
 
@@ -37,11 +35,7 @@ vix_df['VIX'] = vix_df['VIX'].astype(float)
 
 
 
-#Merging two DataFrames
 
-
-
-#Print the shape of Dataframe  and Check for Null Values
 
 
 # Checking for missing values
@@ -53,31 +47,6 @@ vix_df['VIX'] = vix_df['VIX'].astype(float)
 Datum = str(df['Datum'])
 
 
-
-# Analysing Data - Regex
-"""
-def month_no_to_name(monthregex,monthname):
-    
-       This function transforms the format of the date.
-       Instead of a number, the month will be replaced with the 3 character abbreviation
-       so it will be easier to select rows from a specific month later on
-     
-    df['Datum'] = df['Datum'].str.replace(monthregex,monthname, regex=True).astype('str')
-
-month_no_to_name('\.01\.','.Jan.')
-month_no_to_name('\.02\.','.Feb.')
-month_no_to_name('\.03\.','.Mar.')
-month_no_to_name('\.04\.','.Apr.')
-month_no_to_name('\.05\.','.May.')
-month_no_to_name('\.06\.','.Jun.')
-month_no_to_name('\.07\.','.Jul.')
-month_no_to_name('\.08\.','.Aug.')
-month_no_to_name('\.09\.','.Sep.')
-month_no_to_name('\.10\.','.Oct.')
-month_no_to_name('\.11\.','.Nov.')
-month_no_to_name('\.12\.','.Dec.')
-
-  """
 
 #Translating column names
 
@@ -96,6 +65,7 @@ df['dailychange'] = se.values
 df['dailychange'] = df['dailychange'].astype(float)
 
 
+
 upordown = df['dailychange'] > 0
 
 df['Up Or Down'] = upordown
@@ -110,22 +80,45 @@ cleaned_df = df.drop(columns="dailychange")
 
 
 
-up = df.loc[df['Up Or Down'] == 'Up']
-down = df.loc[df['Up Or Down'] == 'Down']
 
 
 
 
-
+#Merging two DataFrames
 merged_data= pd.merge(cleaned_df,vix_df,on='Date')
-print(cleaned_df.shape, vix_df.shape)
-print(merged_data.head())
 
 
-missing_values_count = merged_data.isnull().sum()
-print (missing_values_count)
-print (merged_data.shape)
+
+
+
+
+#missing_values_count = merged_data.isnull().sum()
+#print (missing_values_count)
+#print (merged_data.shape)
 #No missing values detected.
+
+
+
+def month_no_to_name(monthregex,monthname):
+    """
+    This function transforms the format of the date.
+    Instead of a number, the month will be replaced with the 3 character abbreviation
+    so it will be easier to select rows from a specific month later on
+  """
+    merged_data.index = merged_data.index.str.replace(monthregex,monthname, regex=True).astype('str')
+
+month_no_to_name('\.01\.','.Jan.')
+month_no_to_name('\.02\.','.Feb.')
+month_no_to_name('\.03\.','.Mar.')
+month_no_to_name('\.04\.','.Apr.')
+month_no_to_name('\.05\.','.May.')
+month_no_to_name('\.06\.','.Jun.')
+month_no_to_name('\.07\.','.Jul.')
+month_no_to_name('\.08\.','.Aug.')
+month_no_to_name('\.09\.','.Sep.')
+month_no_to_name('\.10\.','.Oct.')
+month_no_to_name('\.11\.','.Nov.')
+month_no_to_name('\.12\.','.Dec.')
 
 
 
@@ -142,6 +135,7 @@ print (merged_data.shape)
 
 
 
+#Charts
 
-print (dax_today_int)
+
 
