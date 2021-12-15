@@ -50,7 +50,7 @@ Datum = str(df['Datum'])
 
 #Translating column names
 
-df = df.rename(columns={"Datum": "Date", "Zuletzt": "Latest Price", "Eröffn.": "Open Price", "Hoch": "High", "Tief": "Low", "Vol": "Volume", "+/- %": "Change"})
+df = df.rename(columns={"Datum": "Date", "Zuletzt": "Close", "Eröffn.": "Open", "Hoch": "High", "Tief": "Low", "Vol": "Vol", "+/- %": "Change"})
 
 df = df.set_index("Date")
 df['Change'] = df['Change'].str.replace(',','.')
@@ -82,12 +82,11 @@ cleaned_df = df.drop(columns="dailychange")
 
 
 
+cleaned_df['Date-number'] = cleaned_df.index
 
 
 #Merging two DataFrames
 merged_data= pd.merge(cleaned_df,vix_df,on='Date')
-
-
 
 
 
@@ -137,6 +136,5 @@ month_no_to_name('\.12\.','.Dec.')
 
 
 #Charts
-
 
 
