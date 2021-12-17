@@ -3,6 +3,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+# ML libraries
+import sklearn
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+
 # Importing dataset via CSV file
 
 data = pd.read_csv('data/passwords.csv')
@@ -25,6 +30,11 @@ df['Password Length'] = df['Password'].apply(len)
 #Investigating data
 
 
+# How many weak passwords consist of 6 numbers only?
+
+weakpassword = ['ekfkefkfekekfekef']
+
+
 def cc(code):
     """
     This Function extracts the most popular passwords by country code
@@ -40,12 +50,8 @@ fr = cc('fr')
 it = cc('it')
 
 
-'''
 # Plotting the top20 passwords for DE
-ax = sns.barplot(x="User_count", y="Password", data=de.head(20))
-plt.show()
 '''
-
 fig, axes = plt.subplots(1, 3)
 
 plt.suptitle("Top 10 Passwords in Germany, France and Italy")
@@ -53,28 +59,52 @@ sns.barplot(x= "User_count", y="Password", data=de.head(10), ax=axes[0])
 sns.barplot(x= "User_count", y="Password", data=fr.head(10), ax=axes[1])
 sns.barplot(x= "User_count", y="Password", data=it.head(10), ax=axes[2])
 plt.show()
-
-
-
-# Add some bar charts showing top pw per country
-
-
-#de = []
-#for x in df['country_code'] == 'de':
-#   de.append(x)
-
+'''
 
 # Merging DataFrames
 
 # Iterations
 
-# Regex
 
 
 # Classification
 
 
-# Ml
+# Two features to create classification for password difficulty
+features = df[['Time_to_crack_in_seconds','Password Length']]
+
+X = StandardScaler().fit_transform(features)
+
+#initialise k_means for each k
+squared_distances = []
+K = range(1,15)
+for k in K:
+    k_means = KMeans(n_clusters=k)
+    model = k_means.fit(X)
+    squared_distances.append(k_means.inertia_)
 
 
-# Visualisations
+#Plotting sum_of_squared
+'''
+plt.plot(K, squared_distances,marker='v')
+plt.xlabel('k')
+plt.ylabel('Squared distances')
+plt.title('Check for an elbow to identify the best number of clusters')
+plt.show()
+'''
+
+# 3 gives us the best result
+kmeans_3 = KMeans(n_clusters=3)
+model = kmeans_3.fit(X)
+predict = kmeans_3.predict(X)
+
+
+# Create additional column with cluster number
+df['Difficulity'] = pd.DataFrame(predict, index=df.index)
+
+
+# Create lists with cat1, cat2 and cat3 pw
+cat1pw = []
+cat2pw = []
+cat3pw = []
+
