@@ -9,10 +9,10 @@ import matplotlib.pyplot as plt
 #print (dax_today_int)
 
 #Loading dataset
-data = pd.read_csv('data/DAX.csv')
+data = pd.read_csv('DAX.csv')
 df = pd.DataFrame(data)
 
-vix = pd.read_csv('data/vix.csv')
+vix = pd.read_csv('vix.csv')
 vix_df = pd.DataFrame(vix)
 vix_df = vix.drop(columns=['Zuletzt','Eröffn.','Hoch','Tief','Vol.'])
 

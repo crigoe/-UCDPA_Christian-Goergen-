@@ -1,9 +1,5 @@
-import matplotlib.pyplot as plt
 import mplfinance as mpf
-import pandas as pd
-import matplotlib.dates as mpl_dates
-import datetime
-from Dax import *
+from zzzZzz.Dax import *
 
 
 daily = pd.DataFrame(

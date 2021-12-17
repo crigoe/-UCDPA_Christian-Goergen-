@@ -1,5 +1,8 @@
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
+
 
 data = pd.read_csv('data/passwords.csv')
 df = pd.DataFrame(data)
@@ -8,7 +11,7 @@ df = pd.DataFrame(data)
 missing_values_count = df.isnull().sum()
 # print (missing_values_count)
 
-# Not all rows seem to have a value in the column 'Global_rank', therefore, we remove this column.
+# Not all rows seem to have a value in the column 'Global_rank'. I am removing this column as we have a similar one "rank".
 # Also, I am removing the column 'Time_to_crack' as we have another column with the same data just in a different format
 
 df = df.drop(columns=['Global_rank','Time_to_crack'])
@@ -33,13 +36,12 @@ def cc(code):
   """
     code = df.loc[(df['country_code'] == code)]
     code = code.drop(columns=['country', 'country_code', 'Rank', 'Time_to_crack_in_seconds', 'Password Length'])
-    print(code)
 
 it = cc('it')
-fr = cc('fr')
-de = cc('de')
-gb = cc('gb')
-ru = cc('ru')
+print(it)
+
+
+
 
 # Add some bar charts showing top pw per country
 
@@ -64,3 +66,4 @@ ru = cc('ru')
 
 
 # Visualisations
+
