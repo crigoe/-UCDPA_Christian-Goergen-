@@ -49,15 +49,15 @@ de = cc('de')
 fr = cc('fr')
 it = cc('it')
 
-
-# Plotting the top20 passwords for DE
 '''
+# Plotting the top20 passwords for DE
+
 fig, axes = plt.subplots(1, 3)
 
 plt.suptitle("Top 10 Passwords in Germany, France and Italy")
-sns.barplot(x= "User_count", y="Password", data=de.head(10), ax=axes[0])
-sns.barplot(x= "User_count", y="Password", data=fr.head(10), ax=axes[1])
-sns.barplot(x= "User_count", y="Password", data=it.head(10), ax=axes[2])
+sns.barplot(x= "User_count", y="Password", data=de.head(20), ax=axes[0])
+sns.barplot(x= "User_count", y="Password", data=fr.head(20), ax=axes[1])
+sns.barplot(x= "User_count", y="Password", data=it.head(20), ax=axes[2])
 plt.show()
 '''
 
@@ -104,7 +104,21 @@ df['Difficulity'] = pd.DataFrame(predict, index=df.index)
 
 
 # Create lists with cat1, cat2 and cat3 pw
-cat1pw = []
-cat2pw = []
-cat3pw = []
+
+pwcat1 = df.loc[(df['Difficulity'] == 0)]
+pwcat1 = pwcat1.drop(columns=['country', 'country_code', 'Rank'])
+
+pwcat2 = df.loc[(df['Difficulity'] == 1)]
+pwcat2 = pwcat2.drop(columns=['country', 'country_code', 'Rank'])
+
+pwcat3 = df.loc[(df['Difficulity'] == 2)]
+pwcat3 = pwcat3.drop(columns=['country', 'country_code', 'Rank'])
+
+# Create dictionary
+passwords = {'Cat1':list(pwcat1['Password']),'Cat2':list(pwcat2['Password']),'Cat3':list(pwcat3['Password'])}
+
+
+print(len(list(pwcat1['Password'])))
+print(len(list(pwcat2['Password'])))
+print(len(list(pwcat3['Password'])))
 
