@@ -33,20 +33,26 @@ def cc(code):
     code = code.drop(columns=['country', 'country_code', 'Rank', 'Time_to_crack_in_seconds', 'Password Length'])
     return code
 
+
+# Creating DataFrames containing the columns "Password" and "User_count"
+de = cc('de')
+fr = cc('fr')
 it = cc('it')
-print(it)
 
 
-'''countries = [it,de,fr,gb,ru]
+'''
+# Plotting the top20 passwords for DE
+ax = sns.barplot(x="User_count", y="Password", data=de.head(20))
+plt.show()
+'''
 
-for x in countries:
-    x = cc(x)
-    print(it,de,fr,gb,ru)
+fig, axes = plt.subplots(1, 3)
 
-    '''
-
-
-
+plt.suptitle("Top 10 Passwords in Germany, France and Italy")
+sns.barplot(x= "User_count", y="Password", data=de.head(10), ax=axes[0])
+sns.barplot(x= "User_count", y="Password", data=fr.head(10), ax=axes[1])
+sns.barplot(x= "User_count", y="Password", data=it.head(10), ax=axes[2])
+plt.show()
 
 
 
