@@ -81,15 +81,14 @@ plt.show()
 
 
 # Merging DataFrames
+"""
+new_df = pd.merge(df1, df2, on='Columnname', how='inner')
+new_df.head()
+"""
 
-# Iterations
 
-
-# Classification
-
-
-# Two features to create classification for password difficulty
-features = df[['User_count','Time_to_crack_in_seconds','Password Length','num_special','num_vowels','num_digits']]
+# Features to create classification for password difficulty
+features = df[['Time_to_crack_in_seconds','Password Length','num_special','num_vowels','num_digits']]
 
 X = StandardScaler().fit_transform(features)
 
@@ -118,22 +117,21 @@ predict = kmeans_3.predict(X)
 
 
 # Create additional column with cluster number
-df['Difficulity'] = pd.DataFrame(predict, index=df.index)
+df['Difficulty'] = pd.DataFrame(predict, index=df.index)
 
 # Create lists with cat1, cat2 and cat3 pw
 
-pwcat1 = df.loc[(df['Difficulity'] == 0)]
+pwcat1 = df.loc[(df['Difficulty'] == 0)]
 pwcat1 = pwcat1.drop(columns=['country', 'country_code', 'Rank'])
 
-pwcat2 = df.loc[(df['Difficulity'] == 1)]
+pwcat2 = df.loc[(df['Difficulty'] == 1)]
 pwcat2 = pwcat2.drop(columns=['country', 'country_code', 'Rank'])
 
-pwcat3 = df.loc[(df['Difficulity'] == 2)]
+pwcat3 = df.loc[(df['Difficulty'] == 2)]
 pwcat3 = pwcat3.drop(columns=['country', 'country_code', 'Rank'])
 
 # Create dictionary
 passwords = {'Cat1':list(pwcat1['Password']),'Cat2':list(pwcat2['Password']),'Cat3':list(pwcat3['Password'])}
-
 
 
 
