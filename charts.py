@@ -13,5 +13,5 @@ sns.catplot("Type of Passwords", data=df, kind="count")
 # Correlation between columns
 pwcorr = df.iloc[:,5:]
 fig, ax = plt.subplots()
-sns.heatmap(pwcorr.corr(), ax=ax)
+sns.heatmap(pwcorr.corr(), linewidths=.5, ax=ax)
 plt.show()

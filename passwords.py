@@ -88,7 +88,7 @@ new_df.head()
 
 
 # Features to create classification for password difficulty
-features = df[['Time_to_crack_in_seconds','Password Length','num_special','num_vowels','num_digits']]
+features = df[['Time_to_crack_in_seconds','Password Length']]
 
 X = StandardScaler().fit_transform(features)
 
@@ -102,13 +102,13 @@ for k in K:
 
 
 #Plotting sum_of_squared
-'''
+
 plt.plot(K, squared_distances,marker='v')
 plt.xlabel('k')
 plt.ylabel('Squared distances')
 plt.title('Check for an elbow to identify the best number of clusters')
 plt.show()
-'''
+
 
 # 3 gives us the best result
 kmeans_3 = KMeans(n_clusters=3)
