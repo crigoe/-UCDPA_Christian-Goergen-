@@ -134,4 +134,12 @@ pwcat3 = pwcat3.drop(columns=['country', 'country_code', 'Rank'])
 passwords = {'Cat1':list(pwcat1['Password']),'Cat2':list(pwcat2['Password']),'Cat3':list(pwcat3['Password'])}
 
 
+#Visualising the clusters
+plt.scatter(x[y_kmeans == 0, 0], x[y_kmeans == 0, 1], s = 100, c = 'red', label = 'Iris-setosa')
+plt.scatter(x[y_kmeans == 1, 0], x[y_kmeans == 1, 1], s = 100, c = 'blue', label = 'Iris-versicolour')
+plt.scatter(x[y_kmeans == 2, 0], x[y_kmeans == 2, 1], s = 100, c = 'green', label = 'Iris-virginica')
 
+#Plotting the centroids of the clusters
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:,1], s = 100, c = 'yellow', label = 'Centroids')
+
+plt.legend()
