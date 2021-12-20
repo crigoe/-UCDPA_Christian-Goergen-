@@ -72,6 +72,9 @@ X = cleaned_df.drop('Up Or Down', axis=1).values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42, stratify=y)
 
 '''
+
+#Plot to determine n_neighbors
+
 # Setup arrays to store train and test accuracies
 neighbors = np.arange(1, 9)
 train_accuracy = np.empty(len(neighbors))
@@ -102,12 +105,25 @@ plt.show()
 
 '''
 
+# Hyperparametertuning
 
-# Create a k-NN classifier with 5 neighbors: knn
-knn = KNeighborsClassifier(n_neighbors=5)
+from sklearn.model_selection import GridSearchCV
+
+param_grid = {'n_neighbors': np.arange(1, 50)}
+
+knn = KNeighborsClassifier()
+knn_cv = GridSearchCV(knn, param_grid, cv=5)
+knn_cv.fit(X_train, y_train)
+
+print(knn_cv.best_params_)
+print(knn_cv.best_score_)
+
+# Create a k-NN classifier with 3 neighbors
+knn = KNeighborsClassifier(n_neighbors=3)
 
 # Fit the classifier to the training data
 knn.fit(X_train,y_train)
 
 print('The accuracy is:',knn.score(X_test, y_test))
-print(cleaned_df.columns)
+
+
