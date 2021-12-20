@@ -1,16 +1,15 @@
+# Importing libraries - see project report for more info on these libraries
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import re
-
-# ML libraries
 import sklearn
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 
 # Importing dataset via CSV file
-
 data = pd.read_csv('data/passwords.csv')
 df = pd.DataFrame(data)
 
@@ -18,9 +17,11 @@ df = pd.DataFrame(data)
 missing_values_count = df.isnull().sum()
 # print (missing_values_count)
 
-# Not all rows seem to have a value in the column 'Global_rank'.
-# I am removing this column as we have a similar one "rank".
-# Also, I am removing the column 'Time_to_crack' as we have another column with the same data just in a different format
+'''
+Not all rows seem to have a value in the column 'Global_rank'.
+I am removing this column as we have a similar one "rank".
+Also, I am removing the column 'Time_to_crack' as we have another column containing that data
+'''
 
 df = df.drop(columns=['Global_rank','Time_to_crack'])
 
@@ -102,13 +103,13 @@ for k in K:
 
 
 #Plotting sum_of_squared
-
+'''
 plt.plot(K, squared_distances,marker='v')
 plt.xlabel('k')
 plt.ylabel('Squared distances')
 plt.title('Check for an elbow to identify the best number of clusters')
 plt.show()
-
+'''
 
 # 3 gives us the best result
 kmeans_3 = KMeans(n_clusters=3)
@@ -135,11 +136,4 @@ passwords = {'Cat1':list(pwcat1['Password']),'Cat2':list(pwcat2['Password']),'Ca
 
 
 #Visualising the clusters
-plt.scatter(x[y_kmeans == 0, 0], x[y_kmeans == 0, 1], s = 100, c = 'red', label = 'Iris-setosa')
-plt.scatter(x[y_kmeans == 1, 0], x[y_kmeans == 1, 1], s = 100, c = 'blue', label = 'Iris-versicolour')
-plt.scatter(x[y_kmeans == 2, 0], x[y_kmeans == 2, 1], s = 100, c = 'green', label = 'Iris-virginica')
 
-#Plotting the centroids of the clusters
-plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:,1], s = 100, c = 'yellow', label = 'Centroids')
-
-plt.legend()
