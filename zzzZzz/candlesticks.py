@@ -23,13 +23,9 @@ daily['Close'] = daily['Close'].str.replace(',','')
 daily['Close'] = daily['Close'].astype(float)
 
 
-
 daily['date_parsed'] = pd.to_datetime(merged_data['Date-number'], format="%d.%m.%Y")
 
 daily.index = (daily['date_parsed'])
 
 daily.index.name = 'Date'
 mpf.plot(daily,type='candle')
-
-
-q = 'How can I plot everything on one chart?'

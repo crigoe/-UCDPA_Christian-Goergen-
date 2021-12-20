@@ -9,10 +9,10 @@ import matplotlib.pyplot as plt
 #print (dax_today_int)
 
 #Loading dataset
-data = pd.read_csv('DAX.csv')
+data = pd.read_csv('../data/DAX.csv')
 df = pd.DataFrame(data)
 
-vix = pd.read_csv('vix.csv')
+vix = pd.read_csv('../data/vix.csv')
 vix_df = pd.DataFrame(vix)
 vix_df = vix.drop(columns=['Zuletzt','Eröffn.','Hoch','Tief','Vol.'])
 
@@ -121,20 +121,6 @@ month_no_to_name('\.12\.','.Dec.')
 
 
 
-#Maschine Learning
-
-#y = df['Date'].values
-#y = df['Up or Down'].values
-
-# Create a k-NN classifier with 6 neighbors
-#knn = KNeighborsClassifier(n_neighbors=6)
-
-# Fit the classifier to the data
-#knn.fit(X,y)
-
-
-
-
-#Charts
+print(merged_data.columns)
 
 

@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Importing data from https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Ausbruchsdaten.html
-data = pd.read_excel('data/Ausbruchsdaten.xlsx',index_col=3)
+data = pd.read_excel('Ausbruchsdaten.xlsx',index_col=3)
 df = pd.DataFrame(data)
 
 # Removing data from 2020 and picking the dataset of current week
