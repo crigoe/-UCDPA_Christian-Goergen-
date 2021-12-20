@@ -1,5 +1,8 @@
-from passwords import *
+from dataframes import *
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+'''
 # Top passwords which are the hardest to crack
 best_passwords = df.nlargest(10, columns='Time_to_crack_in_seconds')
 best_passwords = best_passwords.drop(columns=['country', 'country_code', 'Rank','User_count'])
@@ -34,4 +37,21 @@ pwcorr = df.iloc[:,5:]
 fig, ax = plt.subplots()
 sns.heatmap(pwcorr.corr(), linewidths=.5, ax=ax)
 plt.show()
+'''
+
+# Plotting the top10 passwords for DE, FR and IT
+
+
+f, (ax1, ax2, ax3) = plt.subplots(3, 1)
+plt.suptitle("Top 10 Passwords in Germany, France and Italy")
+
+sns.barplot(x= "User_count", y="Password", data=de.head(10), palette="rocket", ax=ax1)
+sns.barplot(x= "User_count", y="Password", data=fr.head(10), palette="rocket", ax=ax2)
+sns.barplot(x= "User_count", y="Password", data=it.head(10), palette="rocket", ax=ax3)
+
+plt.show()
+
+
+
+
 
