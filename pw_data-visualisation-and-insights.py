@@ -3,18 +3,18 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Top passwords which are the hardest to crack
-best_passwords = df.nlargest(10, columns='Time_to_crack_in_seconds')
-best_passwords = best_passwords.drop(columns=['country', 'country_code', 'Rank','User_count'])
-print(best_passwords)
+best_passwords_df = df.nlargest(10, columns='Time_to_crack_in_seconds')
+best_passwords = best_passwords_df['Password'].tolist()
+print('Insight 2: The Top10 passwords which are the hardest to crack are: ',best_passwords)
 
 # Weakest passwords
-weak_passwords = df.nsmallest(10, columns='Time_to_crack_in_seconds')
-print(weak_passwords)
+weak_passwords_df = df.nsmallest(10, columns='Time_to_crack_in_seconds')
+weak_passwords = weak_passwords_df['Password'].tolist()
+print('Insight 3: The 10 weakest passwords which are the easiest to crack are: ',weak_passwords)
 
-# How many passwords have special characters, vowels or digits?
-print ([df['num_special'].nunique()], 'passwords have special characters')
-print ([df['num_vowels'].nunique()], 'passwords have vowel characters')
-print ([df['num_digits'].nunique()], 'passwords have digit characters')
+print('Insight 4: Most passwords have 6 characters')
+print('Insight 5: 123456 is the most used password in Germany, France and Italy')
+
 
 # Password Length
 plt.hist(df['Password Length'],bins = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
@@ -28,5 +28,4 @@ plt.suptitle("Top 10 Passwords in Germany, France and Italy")
 sns.barplot(x= "User_count", y="Password", data=de.head(10), palette="rocket", ax=ax1)
 sns.barplot(x= "User_count", y="Password", data=fr.head(10), palette="rocket", ax=ax2)
 sns.barplot(x= "User_count", y="Password", data=it.head(10), palette="rocket", ax=ax3)
-
 plt.show()
