@@ -33,7 +33,6 @@ kmeans_3 = KMeans(n_clusters=3)
 model = kmeans_3.fit(X)
 predict = kmeans_3.predict(X)
 
-
 # Create additional column with cluster number
 df['Difficulty'] = pd.DataFrame(predict, index=df.index)
 
