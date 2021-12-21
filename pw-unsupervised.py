@@ -1,4 +1,4 @@
-from dataframes import *
+from pw_dataframes import *
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 
@@ -46,3 +46,5 @@ pwcat3 = pwcat3.drop(columns=['country', 'country_code', 'Rank'])
 
 # Create dictionary
 passwords = {'Cat1':list(pwcat1['Password']),'Cat2':list(pwcat2['Password']),'Cat3':list(pwcat3['Password'])}
+
+#Print or visualize Clusters

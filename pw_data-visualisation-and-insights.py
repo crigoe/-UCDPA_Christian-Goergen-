@@ -1,4 +1,4 @@
-from dataframes import *
+from pw_dataframes import *
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -16,23 +16,9 @@ print ([df['num_special'].nunique()], 'passwords have special characters')
 print ([df['num_vowels'].nunique()], 'passwords have vowel characters')
 print ([df['num_digits'].nunique()], 'passwords have digit characters')
 
-# Correlation
-correlation=df[['Rank','User_count', 'Time_to_crack_in_seconds', 'Password Length']].corr()
-plt.imshow(correlation)
-
 # Password Length
 plt.hist(df['Password Length'],bins = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
 plt.title('Distribution of Password Length')
-plt.show()
-
-# Type of Passwords
-plt.title('Type of Passwords')
-sns.catplot("Type of Passwords", data=df, kind="count")
-
-# Correlation between columns
-pwcorr = df.iloc[:,5:]
-fig, ax = plt.subplots()
-sns.heatmap(pwcorr.corr(), linewidths=.5, ax=ax)
 plt.show()
 
 # Plotting the top10 passwords for DE, FR and IT

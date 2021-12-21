@@ -1,9 +1,6 @@
-# Importing libraries - see project report for more info on these libraries
-
 import numpy as np
 import pandas as pd
 import re
-
 
 # Importing dataset via CSV file
 data = pd.read_csv('data/passwords.csv')
@@ -44,8 +41,6 @@ for x in df['Password']:
         type_of_passwords.append('Mixed')
 
 df['Type of Passwords'] = type_of_passwords
-print(df.head())
-
 
 def cc(code):
     """
