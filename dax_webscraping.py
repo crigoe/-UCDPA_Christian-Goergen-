@@ -15,4 +15,4 @@ dax_today = results.get_text()
 dax_today_int = dax_today[:2] + dax_today[3:6]
 dax_today_int = int(dax_today_int)
 
-print("Today's DAX price is:",dax_today_int)
+print("The latest available DAX price is:",dax_today_int)

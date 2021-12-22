@@ -4,13 +4,6 @@ import pandas as pd
 from dax_dataframes import *
 from dax_supervised import *
 
-
-# Printing results of hyperparametertuning
-print('results of hyperparametertuning: ',knn_cv.best_params_)
-print('knn score: ',knn_cv.best_score_)
-print('The accuracy is: ',knn.score(X_test, y_test))
-
-
 # Create new df
 merged_data = cleaned_df
 

@@ -57,7 +57,8 @@ passwords3 = list(passwords.values())[2]
 
 #Print cluster 1
 
-print (passwords1)
+print ('Passwords of Cluster 1: ',passwords1)
+print (pwcat1.describe())
 wordcloud = WordCloud().generate(" ".join(passwords1))
 # Display the generated image:
 plt.figure(figsize=(10,7))
@@ -68,7 +69,8 @@ plt.show()
 
 #Print cluster 2
 
-print (passwords2)
+print ('Passwords of Cluster 2: ',passwords2)
+print (pwcat2.describe())
 wordcloud = WordCloud().generate(" ".join(passwords2))
 # Display the generated image:
 plt.figure(figsize=(10,7))
@@ -79,7 +81,8 @@ plt.show()
 
 #Print cluster 3
 
-print (passwords3)
+print ('Passwords of Cluster 3: ',passwords3)
+print (pwcat3.describe())
 wordcloud = WordCloud().generate(" ".join(passwords3))
 # Display the generated image:
 plt.figure(figsize=(10,7))
