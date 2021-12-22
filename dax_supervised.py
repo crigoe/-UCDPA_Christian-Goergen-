@@ -15,7 +15,6 @@ X = cleaned_df.drop('Up Or Down', axis=1).values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42, stratify=y)
 
 '''
-
 #Plot to determine n_neighbors
 
 # Setup arrays to store train and test accuracies
@@ -45,11 +44,10 @@ plt.legend()
 plt.xlabel('Number of Neighbors')
 plt.ylabel('Accuracy')
 plt.show()
-
 '''
 
-# Printing result of Hyperparametertuning and accuracy
 
+# Printing result of Hyperparametertuning and accuracy
 
 param_grid = {'n_neighbors': np.arange(1, 50)}
 
@@ -57,8 +55,8 @@ knn = KNeighborsClassifier()
 knn_cv = GridSearchCV(knn, param_grid, cv=5)
 knn_cv.fit(X_train, y_train)
 
-#print(knn_cv.best_params_)
-#print(knn_cv.best_score_)
+print('The best number of k according to Grid Search is:',knn_cv.best_params_)
+print('Grid Search accuracy score is:', knn_cv.best_score_)
 
 # Create a k-NN classifier with 3 neighbors
 knn = KNeighborsClassifier(n_neighbors=3)
@@ -66,6 +64,8 @@ knn = KNeighborsClassifier(n_neighbors=3)
 # Fit the classifier to the training data
 knn.fit(X_train,y_train)
 
-#print('The accuracy is:',knn.score(X_test, y_test))
+print('The accuracy of the model according to the score function is:',knn.score(X_test, y_test))
 
-#Add Prediction
+#Assign all prediction as a numpy array to the variable 'y_pred' and print them
+y_pred = knn.predict(X)
+print ('Here are all predicted labels: ', y_pred)
